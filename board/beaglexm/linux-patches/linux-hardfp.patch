@@ -1,0 +1,15 @@
+Index: linux-3.9.8/arch/arm/Makefile
+===================================================================
+--- linux-3.9.8.orig/arch/arm/Makefile	2013-06-27 12:41:32.000000000 -0500
++++ linux-3.9.8/arch/arm/Makefile	2013-07-11 12:36:45.395988471 -0500
+@@ -116,8 +116,8 @@
+ endif
+ 
+ # Need -Uarm for gcc < 3.x
+-KBUILD_CFLAGS	+=$(CFLAGS_ABI) $(CFLAGS_ISA) $(arch-y) $(tune-y) $(call cc-option,-mshort-load-bytes,$(call cc-option,-malignment-traps,)) -msoft-float -Uarm
+-KBUILD_AFLAGS	+=$(CFLAGS_ABI) $(AFLAGS_ISA) $(arch-y) $(tune-y) -include asm/unified.h -msoft-float
++KBUILD_CFLAGS	+=$(CFLAGS_ABI) $(CFLAGS_ISA) $(arch-y) $(tune-y) $(call cc-option,-mshort-load-bytes,$(call cc-option,-malignment-traps,)) -Uarm
++KBUILD_AFLAGS	+=$(CFLAGS_ABI) $(AFLAGS_ISA) $(arch-y) $(tune-y) -include asm/unified.h
+ 
+ CHECKFLAGS	+= -D__arm__
+ 
