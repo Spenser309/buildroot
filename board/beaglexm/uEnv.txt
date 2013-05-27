@@ -1,0 +1,5 @@
+devtree=omap3-beagle-xm.dtb
+dtboot=run mmcargs; fatload mmc ${mmcdev}:1 0x80200000 uImage; fatload mmc
+${mmcdev}:1 0x81200000 ${devtree}; bootm 0x80200000 - 0x81200000
+uenvcmd=run dtboot
+optargs=consoleblank=0
