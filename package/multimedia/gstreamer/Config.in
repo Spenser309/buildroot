@@ -4,7 +4,8 @@ config BR2_PACKAGE_GSTREAMER
 	depends on BR2_TOOLCHAIN_HAS_THREADS
 	select BR2_PACKAGE_LIBGLIB2
 	help
-	  GStreamer is an open source multimedia framework.
+	  GStreamer is an open source multimedia framework. This 0.10.x version of
+	  Gstreamer is incompatible with Gstreamer 1.X. 
 
 	  This 0.10.x version of GStreamer is incompatible with
 	  GStreamer 1.X.
