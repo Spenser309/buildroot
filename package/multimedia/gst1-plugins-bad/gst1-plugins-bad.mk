@@ -635,6 +635,8 @@ GST1_PLUGINS_BAD_CONF_ENV += \
 	-I$(STAGING_DIR)/usr/include/IL \
 	-I$(STAGING_DIR)/usr/include/interface/vcos/pthreads \
 	-I$(STAGING_DIR)/usr/include/interface/vmcs_host/linux"
+else
+GST1_PLUGINS_BAD_CONF_OPT += --with-egl-window-system=none
 endif
 else
 GST1_PLUGINS_BAD_CONF_OPT += --disable-eglgles
