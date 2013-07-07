@@ -1,0 +1,13 @@
+config BR2_PACKAGE_BEAGLE_CAPES
+	bool "beagle-capes"
+	depends on BR2_LINUX_KERNEL && BR2_arm
+	select BR2_LINUX_KERNEL_INSTALL_FIRMWARE
+	help
+	  Installs beaglebone capes firmwares.
+
+	  These firmwares are bundled in the TI fork on the Linux kernel for the
+	  BeagleBone; therefore, a kernel with these firmwares must be configured in
+	  the Kernel Configuration section of Buildroot.
+
+comment "beagle-capes requires a Linux kernel"
+	depends on !(BR2_LINUX_KERNEL)
