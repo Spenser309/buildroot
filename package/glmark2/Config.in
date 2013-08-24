@@ -1,0 +1,17 @@
+config BR2_PACKAGE_GLMARK2
+	bool "glmark2"
+	depends on BR2_PACKAGE_MESA3D
+	depends on BR2_PACKAGE_MESA3D_GBM # depends on udev cannot select
+	depends on BR2_LARGEFILE
+	depends on BR2_PACKAGE_HAS_OPENGL || \
+		(BR2_PACKAGE_HAS_OPENGL_EGL && BR2_PACKAGE_HAS_OPENGL_ES)
+	select BR2_PACKAGE_JPEG
+	select BR2_PACKAGE_LIBPNG12
+	help
+	  glmark2 is a benchmark for OpenGL (ES) 2.0. It uses only the subset of the
+	  OpenGL 2.0 API that is compatible with OpenGL ES 2.0.
+
+comment "glmark2 requires Mesa3D GBM support and largefile support in toolchain"
+	depends on (BR2_PACKAGE_HAS_OPENGL || \
+		(BR2_PACKAGE_HAS_OPENGL_EGL && BR2_PACKAGE_HAS_OPENGL_ES)) && \
+		(!BR2_LARGEFILE || !BR2_PACKAGE_MESA3D_GBM)

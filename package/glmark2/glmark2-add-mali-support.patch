@@ -1,0 +1,102 @@
+Mali uses a slightly different windowing structure than most
+implementations add support through this patch.
+
+Signed-off-by: Spenser Gilliland <spenser@gillilanding.com>
+---
+Index: glmark2-279/src/gl-state-egl.cpp
+===================================================================
+--- glmark2-279.orig/src/gl-state-egl.cpp	2013-08-21 14:49:38.953803965 -0500
++++ glmark2-279/src/gl-state-egl.cpp	2013-08-21 14:59:42.389814979 -0500
+@@ -414,9 +414,12 @@
+ {
+     if (egl_display_)
+         return true;
+-
++#ifdef HAS_MALI
++    egl_display_ = eglGetDisplay(EGL_DEFAULT_DISPLAY);
++#else
+     egl_display_ = eglGetDisplay(native_display_);
+-    if (!egl_display_) {
++#endif
++    if (egl_display_ == EGL_NO_DISPLAY) {
+         Log::error("eglGetDisplay() failed with error: 0x%x\n", eglGetError());
+         return false;
+     }
+Index: glmark2-279/src/native-state-fbdev.cpp
+===================================================================
+--- glmark2-279.orig/src/native-state-fbdev.cpp	2013-08-19 17:36:32.000000000 -0500
++++ glmark2-279/src/native-state-fbdev.cpp	2013-08-21 14:59:58.629815276 -0500
+@@ -31,7 +31,9 @@
+ #include <unistd.h>
+ #include <sys/ioctl.h>
+ #include <linux/fb.h>
+-
++#if HAS_MALI
++#include <EGL/egl.h>
++#endif
+ #ifdef ANDROID
+ #define FBDEV_DEV "/dev/graphics/fb"
+ #else
+@@ -79,7 +81,13 @@
+ NativeStateFBDEV::window(WindowProperties& properties)
+ {
+     properties = winprops;
++#ifdef HAS_MALI
++    native_window.height = winprops.height;
++    native_window.width = winprops.width;
++    return reinterpret_cast<void*>(&native_window);
++#else
+     return NULL;
++#endif
+ }
+ 
+ void
+Index: glmark2-279/src/native-state-fbdev.h
+===================================================================
+--- glmark2-279.orig/src/native-state-fbdev.h	2013-08-19 17:36:32.000000000 -0500
++++ glmark2-279/src/native-state-fbdev.h	2013-08-21 15:00:14.345815563 -0500
+@@ -30,6 +30,10 @@
+ #include <csignal>
+ #include <cstring>
+ 
++#ifdef HAS_MALI
++#include <EGL/egl.h>
++#endif
++
+ class NativeStateFBDEV : public NativeState
+ {
+ public:
+@@ -50,7 +54,9 @@
+     static volatile std::sig_atomic_t should_quit_;
+     int fd;
+     WindowProperties winprops;
+-
++#ifdef HAS_MALI
++    struct mali_native_window native_window;
++#endif
+     bool init();
+     void cleanup();
+ };
+Index: glmark2-279/wscript
+===================================================================
+--- glmark2-279.orig/wscript	2013-08-19 17:36:32.000000000 -0500
++++ glmark2-279/wscript	2013-08-21 15:00:24.245815743 -0500
+@@ -46,7 +46,8 @@
+                    dest = 'flavors',
+                    help = "a list of flavors to build (%s, all)" % FLAVORS_STR)
+     opt.parser.set_default('flavors', [])
+-
++    opt.add_option('--for-mali', action='store_true', dest = 'mali',
++                   default = False, help='enable ARM Mali GPU support')
+     opt.add_option('--no-debug', action='store_false', dest = 'debug',
+                    default = True, help='disable compiler debug information')
+     opt.add_option('--no-opt', action='store_false', dest = 'opt',
+@@ -132,6 +133,8 @@
+         ctx.env.prepend_value('CXXFLAGS', '-O2')
+     if Options.options.debug:
+         ctx.env.prepend_value('CXXFLAGS', '-g')
++    if Options.options.mali:
++        ctx.env.append_unique('DEFINES','HAS_MALI=1')
+ 
+     ctx.env.HAVE_EXTRAS = False
+     if Options.options.extras_path is not None:

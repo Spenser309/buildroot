@@ -1,0 +1,17 @@
+Bug fix in program.cc.  There is no such type as GLchar.
+
+Signed-off-by: Spenser Gilliland <spenser@gillilanding.com>
+---
+Index: glmark2-2012.12/src/libmatrix/program.cc
+===================================================================
+--- glmark2-2012.12.orig/src/libmatrix/program.cc	2012-12-18 13:45:45.000000000 -0600
++++ glmark2-2012.12/src/libmatrix/program.cc	2013-08-13 20:08:27.005724911 -0500
+@@ -17,6 +17,8 @@
+ #include "gl-if.h"
+ #include "program.h"
+ 
++typedef char GLchar;
++
+ using std::string;
+ using LibMatrix::mat4;
+ using LibMatrix::mat3;
