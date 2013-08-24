@@ -11,6 +11,16 @@ config BR2_PACKAGE_SUNXI_CEDARX
 	  http://github.com/linux-sunxi/cedarx-libs
 	  http://linux-sunxi.org/CedarX
 
+if BR2_PACKAGE_SUNXI_CEDARX
+
+config BR2_PACKAGE_SUNXI_CEDARX_DEMO
+	bool "install enc_dec_test demo"
+	help
+	  Install a test program which verifies the functionality of the CedarX
+	  libraries
+
+endif
+
 comment "sunxi-cedarx needs an (e)glibc toolchain"
 	depends on BR2_arm
 	depends on !BR2_TOOLCHAIN_USES_GLIBC
