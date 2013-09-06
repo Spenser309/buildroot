@@ -1,0 +1,8 @@
+config BR2_PACKAGE_MESA3D_DEMOS
+	bool "mesa3d-demos"
+	depends on BR2_PACKAGE_HAS_OPENGL || BR2_PACKAGE_HAS_OPENGL_ES \
+		|| BR2_PACKAGE_HAS_OPENGL_EGL || BR2_PACKAGE_HAS_OPENVG
+	help
+	  OpenGL demos from the Mesa 3D project.
+
+	  http://mesa3d.org
