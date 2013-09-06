@@ -1,0 +1,30 @@
+Fix build issue when gbm backend is built without dri support.
+
+Signed-off-by: Spenser Gilliland <spenser@gillilanding.com>
+
+---
+Index: mesa3d-9.1.6/src/gbm/main/backend.c
+===================================================================
+--- mesa3d-9.1.6.orig/src/gbm/main/backend.c	2012-11-24 11:57:41.000000000 -0600
++++ mesa3d-9.1.6/src/gbm/main/backend.c	2013-08-16 10:59:58.844753588 -0500
+@@ -36,7 +36,9 @@
+ 
+ #define ARRAY_SIZE(a) (sizeof(a)/sizeof((a)[0]))
+ 
++#ifdef HAVE_DRI
+ extern const struct gbm_backend gbm_dri_backend;
++#endif
+ 
+ struct backend_desc {
+    const char *name;
+@@ -44,7 +46,9 @@
+ };
+ 
+ static const struct backend_desc backends[] = {
+-   { "gbm_dri.so", &gbm_dri_backend },
++#ifdef HAVE_DRI
++	{ "gbm_dri.so", &gbm_dri_backend },
++#endif
+    { "gbm_gallium_drm.so", NULL },
+ };
+ 
