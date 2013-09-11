@@ -1,0 +1,12 @@
+setenv initrd_high "0xffffffff"
+setenv fdt_high "0xffffffff"
+setenv console_args "console=tty1 console=ttySAC1,115200n8"
+setenv fb_x_res "1920"
+setenv fb_y_res "1080"
+setenv hdmi_phy_res "1080"
+setenv disp_args "fb_x_res=${fb_x_res} fb_y_res=${fb_y_res} hdmi_phys_res=${hdmi_phy_res}"
+setenv root_args "root=/dev/mmcblk0p2 rootwait ro"
+setenv addl_args "mem=2047M"
+setenv bootcmd "fatload mmc 0:1 0x40008000 zImage; bootm 0x40008000"
+setenv bootargs "${console_args} ${disp_args} ${root_args} ${addl_args}"
+boot

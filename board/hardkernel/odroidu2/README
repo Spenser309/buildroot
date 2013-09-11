@@ -1,0 +1,14 @@
+Hardkernel Odroid U2 Support
+
+== Boot from SD Card ==
+
+> make odroidu2_defconfig
+> make O=<outdir>
+> sudo board/hardkernel/odroidu2/mksdcard.sh <outdir>/images <drive>
+
+example:
+
+> make odroidu2_defconfig
+> make # O=output is the default if O is ommitted.
+> sudo board/hardkernel/odroidu2/mksdcard.sh output/images /dev/mmcblk0
+

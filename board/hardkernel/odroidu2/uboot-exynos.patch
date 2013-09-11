@@ -1,0 +1,33 @@
+Index: uboot-odroid-v2010.12/board/samsung/smdk4212/smc.c
+===================================================================
+--- uboot-odroid-v2010.12.orig/board/samsung/smdk4212/smc.c
++++ uboot-odroid-v2010.12/board/samsung/smdk4212/smc.c
+@@ -90,6 +90,7 @@ static inline u32 exynos_smc(u32 cmd, u3
+ 	register u32 reg3 __asm__("r3") = arg3;
+ 
+ 	__asm__ volatile (
++		".arch_extension sec\n"
+ 		"smc	0\n"
+ 		: "+r"(reg0), "+r"(reg1), "+r"(reg2), "+r"(reg3)
+ 
+@@ -104,6 +105,7 @@ static inline u32 exynos_smc_read(u32 cm
+ 	register u32 reg1 __asm__("r1") = 0;
+ 
+ 	__asm__ volatile (
++		".arch_extension sec\n"
+ 		"smc	0\n"
+ 		: "+r"(reg0), "+r"(reg1)
+ 
+Index: uboot-odroid-v2010.12/arch/arm/cpu/armv7/config.mk
+===================================================================
+--- uboot-odroid-v2010.12.orig/arch/arm/cpu/armv7/config.mk
++++ uboot-odroid-v2010.12/arch/arm/cpu/armv7/config.mk
+@@ -20,7 +20,7 @@
+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ # MA 02111-1307 USA
+ #
+-PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -msoft-float
++PLATFORM_RELFLAGS += -fno-common -ffixed-r8 -mfloat-abi=hard -mfpu=vfpv3
+ 
+ # Make ARMv5 to allow more compilers to work, even though its v7a.
+ PLATFORM_CPPFLAGS += -march=armv7-a
