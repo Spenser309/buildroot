@@ -116,6 +116,8 @@ define UBOOT_INSTALL_IMAGES_CMDS
 	$(if $(BR2_TARGET_UBOOT_ENVIMAGE),
 		$(HOST_DIR)/usr/bin/mkenvimage -s $(BR2_TARGET_UBOOT_ENVIMAGE_SIZE) \
 		-o $(BINARIES_DIR)/uboot-env.bin $(BR2_TARGET_UBOOT_ENVIMAGE_SOURCE))
+	$(if $(BR2_TARGET_UBOOT_EXYNOS),
+		cp -dprf $(@D)/sd_fuse $(BINARIES_DIR)/)
 endef
 
 define UBOOT_INSTALL_OMAP_IFT_IMAGE

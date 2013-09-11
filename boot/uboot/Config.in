@@ -155,6 +155,13 @@ config BR2_TARGET_UBOOT_OMAP_IFT_CONFIG
 
 endif
 
+config BR2_TARGET_UBOOT_EXYNOS
+	depends on BR2_arm || BR2_armeb
+	bool "copy sdfuse to images (Exynos)"
+	help
+	  The sd_fusing.sh script and binary signed images for Exynos 4212
+	  (Prime) are copied to the images directory.
+
 menuconfig BR2_TARGET_UBOOT_NETWORK
 	bool "Custom Network Settings"
 	help
