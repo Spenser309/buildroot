@@ -15,5 +15,9 @@ LIBPNG_DEPENDENCIES = host-pkgconf zlib
 LIBPNG_CONFIG_SCRIPTS = libpng$(LIBPNG_SERIES)-config libpng-config
 LIBPNG_CONF_OPT = $(if $(BR2_ARM_CPU_HAS_NEON),--enable-arm-neon=yes,--enable-arm-neon=no)
 
+# Ensure this libpng is the last installed in the case of multiple libpng
+# installs.
+LIBPNG_DEPENDENCIES += $(if $(BR2_PACKAGE_LIBPNG12),libpng12)
+
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))
