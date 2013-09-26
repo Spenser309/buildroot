@@ -7,6 +7,6 @@ Name: egl
 Description: ARM Mali implementation of EGL
 Version: 1.4
 Requires:
-Libs: -L${libdir} -lEGL -lGLESv2 -lUMP
-Cflags: -I${includedir}/EGL/ -I${includedir}
+Libs: -L${libdir} -lEGL -lGLESv2 -lUMP -lrt -lpthread
+Cflags: -I{includedir}/EGL/ -I${includedir}
 
