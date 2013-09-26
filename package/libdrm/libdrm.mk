@@ -19,6 +19,9 @@ LIBDRM_CONF_OPT = \
 	--disable-cairo-tests \
 	--disable-manpages
 
+LIBDRM_CONF_ENV = \
+	LIBS="-lrt -lpthread"
+
 ifeq ($(BR2_PACKAGE_LIBDRM_INTEL),y)
 LIBDRM_CONF_OPT += --enable-intel
 LIBDRM_DEPENDENCIES += libatomic_ops xlib_libpciaccess
