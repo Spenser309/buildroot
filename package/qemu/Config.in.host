@@ -1,0 +1,6 @@
+config BR2_PACKAGE_HOST_QEMU
+	bool "host qemu"
+	help
+	  QEMU - Machine Emulator 
+
+	  http://qemu.org/
