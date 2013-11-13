@@ -9,6 +9,7 @@ choice
 config BR2_TOOLCHAIN_BUILDROOT_UCLIBC
 	bool "uClibc"
 	select BR2_TOOLCHAIN_USES_UCLIBC
+	depends on !BR2_microblaze
 	help
 	  This option selects uClibc as the C library for the
 	  cross-compilation toolchain.
