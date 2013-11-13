@@ -73,6 +73,9 @@ INFLATE.tar  = cat
 # suitable-extractor(filename): returns extractor based on suffix
 suitable-extractor = $(INFLATE$(suffix $(1)))
 
+# github(user,package,version): returns site of github repository
+github = https://github.com/$(1)/$(2)/tarball/$(3)
+
 # MESSAGE Macro -- display a message in bold type
 MESSAGE     = echo "$(TERM_BOLD)>>> $($(PKG)_NAME) $($(PKG)_VERSION) $(1)$(TERM_RESET)"
 TERM_BOLD  := $(shell tput smso)
