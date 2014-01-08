@@ -14,7 +14,7 @@ PIXMAN_DEPENDENCIES = host-pkgconf
 PIXMAN_AUTORECONF = YES
 
 # don't build gtk based demos
-PIXMAN_CONF_OPT = --disable-gtk
+PIXMAN_CONF_OPT = --disable-gtk --disable-tests --disable-demos
 
 # disable iwmmxt support for CPU's that don't have
 # this feature
