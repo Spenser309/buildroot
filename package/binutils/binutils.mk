@@ -23,16 +23,19 @@ endif
 ifeq ($(ARCH),avr32)
 BINUTILS_SITE = ftp://www.at91.com/pub/buildroot
 endif
-ifeq ($(BR2_arc),y)
+ifeq ($(findstring git,$(BINUTILS_VERSION))$(BR2_arc),gity)
+BINUTILS_VERSION = 0c824ba511fa9b028220eb3c39b566af89ac9dda
 BINUTILS_SITE = $(call github,foss-for-synopsys-dwc-arc-processors,binutils,$(BINUTILS_VERSION))
 BINUTILS_SOURCE = binutils-$(BINUTILS_VERSION).tar.gz
 BINUTILS_FROM_GIT = y
 endif
-ifeq ($(BR2_microblaze),y)
+ifeq ($(findstring git,$(BINUTILS_VERSION))$(BR2_microblaze),gity)
+BINUTILS_VERSION = 8351467c933d277ebea0c8d99ad2b65b5f7b6bc2
 BINUTILS_SITE = $(call github,Xilinx,binutils,$(BINUTILS_VERSION))
 BINUTILS_SOURCE = binutils-$(BINUTILS_VERSION).tar.gz
 BINUTILS_FROM_GIT = y
 endif
+
 BINUTILS_SITE ?= $(BR2_GNU_MIRROR)/binutils
 BINUTILS_SOURCE ?= binutils-$(BINUTILS_VERSION).tar.bz2
 BINUTILS_EXTRA_CONFIG_OPTIONS = $(call qstrip,$(BR2_BINUTILS_EXTRA_CONFIG_OPTIONS))
