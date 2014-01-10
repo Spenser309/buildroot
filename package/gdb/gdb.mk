@@ -9,28 +9,32 @@ GDB_SITE    = $(BR2_GNU_MIRROR)/gdb
 
 # When no version is defined, it means that cross-gdb for the host has
 # not been enabled, and we will only build gdbserver or gdb for the
-# target. In this case, use the latest available version
+# target. In this case, use the latest working version for the architecture
 # automatically.
 ifeq ($(GDB_VERSION),)
 ifeq ($(BR2_bfin),y)
 GDB_VERSION = 6.6a
 else ifeq ($(BR2_avr32),y)
 GDB_VERSION = 6.7.1-avr32-2.1.5
+else ifeq ($(BR2_microblaze),y)
+GDB_VERSION = mb-git
+else ifeq ($(BR2_arc),y)
+GDB_VERSION = arc-git
 else
 GDB_VERSION = 7.5.1
 endif
 endif
 
-ifeq ($(BR2_arc),y)
+ifeq ($(findstring git,$(GDB_VERSION))$(BR2_arc),gity)
 GDB_SITE = $(call github,foss-for-synopsys-dwc-arc-processors,gdb,$(GDB_VERSION))
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
-GDB_FROM_GIT = y
+GDB_VERSION = f25a1952afd054205f9471e449c1f7ca5b271b7c
 endif
 
-ifeq ($(BR2_microblaze),y)
+ifeq ($(findstring git,$(GDB_VERSION))$(BR2_microblaze),gity)
 GDB_SITE = $(call github,Xilinx,gdb,$(GDB_VERSION))
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
-GDB_FROM_GIT = y
+GDB_VERSION = 6be65fb56ea6694a9260733a536a023a1e2d4d57
 endif
 
 ifeq ($(GDB_VERSION),6.7.1-avr32-2.1.5)
