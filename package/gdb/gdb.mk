@@ -34,7 +34,7 @@ endif
 ifeq ($(findstring git,$(GDB_VERSION))$(BR2_microblaze),gity)
 GDB_SITE = $(call github,Xilinx,gdb,$(GDB_VERSION))
 GDB_SOURCE = gdb-$(GDB_VERSION).tar.gz
-GDB_VERSION = 6be65fb56ea6694a9260733a536a023a1e2d4d57
+GDB_VERSION = xsdk_2013.4
 endif
 
 ifeq ($(GDB_VERSION),6.7.1-avr32-2.1.5)
