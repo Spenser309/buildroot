@@ -24,7 +24,7 @@ GCC_VERSION = 7466697995233cc3aab5b9427bf843e3c7fabd80
 GCC_SITE = $(call github,foss-for-synopsys-dwc-arc-processors,gcc,$(GCC_VERSION))
 GCC_SOURCE = gcc-$(GCC_VERSION).tar.gz
 else ifeq ($(findstring git,$(GCC_VERSION))$(BR2_microblaze),gity)
-GCC_VERSION = b93bb009e021aba64dd4b8cdb0bbc5a176c55543
+GCC_VERSION = xsdk_2013.4
 GCC_SITE = $(call github,Xilinx,gcc,$(GCC_VERSION))
 GCC_SOURCE = gcc-$(GCC_VERSION).tar.gz
 else
