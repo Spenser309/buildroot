@@ -30,7 +30,7 @@ BINUTILS_SOURCE = binutils-$(BINUTILS_VERSION).tar.gz
 BINUTILS_FROM_GIT = y
 endif
 ifeq ($(findstring git,$(BINUTILS_VERSION))$(BR2_microblaze),gity)
-BINUTILS_VERSION = 8351467c933d277ebea0c8d99ad2b65b5f7b6bc2
+BINUTILS_VERSION = xsdk_2013.4
 BINUTILS_SITE = $(call github,Xilinx,binutils,$(BINUTILS_VERSION))
 BINUTILS_SOURCE = binutils-$(BINUTILS_VERSION).tar.gz
 BINUTILS_FROM_GIT = y
