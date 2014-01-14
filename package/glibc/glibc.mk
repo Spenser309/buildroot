@@ -6,11 +6,11 @@
 
 ifeq ($(BR2_microblaze),y)
 ifeq ($(BR2_TOOLCHAIN_BUILDROOT_EGLIBC),y)
-GLIBC_VERSION = 7f0bcce417c47aefad06ddfec7cd4ced3a4e10ff
+GLIBC_VERSION = xsdk_14.6
 GLIBC_SITE = $(call github,Xilinx,eglibc,$(GLIBC_VERSION))
 GLIBC_SRC_SUBDIR = .
 else
-GLIBC_VERSION = b86835ca92a1942ed08d8b5ee47498e711feaddb
+GLIBC_VERSION = xsdk_2013.4
 GLIBC_SITE = $(call github,Xilinx,glibc,$(GLIBC_VERSION))
 GLIBC_SRC_SUBDIR = .
 endif
